@@ -1,0 +1,42 @@
+---
+import { typeColors,typeTextColors }  from "../typescript/types.ts";
+
+export interface Props {
+  name: string;
+  url: string;
+  type: string;
+  id: number;
+  sprites: any;
+}
+
+const { name, url, type, id, sprites } = Astro.props;
+---
+
+<a href=`/${id}`>
+  <div
+    class="bg-white rounded-lg shadow-xl overflow-hidden flex flex-col items-center justify-center m-6 transform transition-transform hover:scale-105"
+  >
+    <div class="pt-5">
+      <img src={sprites} alt={name} class="w-40 h-40 object-cover" />
+    </div>
+    <div class="p-4 flex items-center">
+      <span class="bg-gray-200 rounded-full text-sm px-2 pt-1 font-bold"
+        >#{id < 10 ? `00${id}` : id < 100 ? `0${id}` : id}</span
+      >
+      <h2 class="text-xl font-bold ml-2">{name}</h2>
+    </div>
+    <div class="flex pb-6">
+      {
+        type
+          .split(", ")
+          .map((t) => (
+            <span
+              class={`${typeColors[t]} ${typeTextColors[t]} rounded-full px-2 py-1 text-sm font-semibold ml-2`}
+            >
+              {t.toUpperCase()}
+            </span>
+          ))
+      }
+    </div>
+  </div>
+</a>
