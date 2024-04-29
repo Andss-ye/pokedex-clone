@@ -1,6 +1,12 @@
 ---
 import Card from "./Card.astro";
 
+interface PokemonType {
+  type: {
+    name: string;
+  };
+}
+
 const URL = "https://pokeapi.co/api/v2/pokemon?limit=100";
 const response = await fetch(URL);
 const data = await response.json();
@@ -8,7 +14,7 @@ const pokemons = await Promise.all(
   data.results.map(async (pokemon: Pokemon) => {
     const pokemonResponse = await fetch(pokemon.url);
     const pokemonData = await pokemonResponse.json();
-    const types = pokemonData.types.map((type) => type.type.name).join(", ");
+    const types = pokemonData.types.map((type: PokemonType) => type.type.name).join(", ");
     const id = pokemonData.id;
     const sprites = pokemonData.sprites.other["official-artwork"].front_default;
     return { name: pokemon.name, url: pokemon.url, type: types, id: id, sprites: sprites };
