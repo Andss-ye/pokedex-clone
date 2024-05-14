@@ -34,55 +34,41 @@ const defense: number = defenseStat ? defenseStat.base_stat : 0;
 
 ---
 
-<Layout title=`Detalles de ${name}`>
-  <div class="container mx-auto px-8 py-20 bg-gray-200 rounded-2xl">
-    <div class="flex justify-center">
-      <div class="flex items-center mr-24">
-        <img
-          class="h-96 w-96"
-          src={sprites.other["official-artwork"].front_default}
-          alt={name}
-        />
+<Layout title={`Detalles de ${name}`}>
+  <div class="container mx-auto px-4 py-20 bg-gray-200 rounded-2xl md:px-8">
+    <div class="flex flex-col justify-center items-center md:flex-row">
+      <div class="mb-8 md:mb-0 md:mr-24">
+        <img class="h-64 w-64 md:h-96 md:w-96" src={sprites.other["official-artwork"].front_default} alt={name} />
       </div>
-      <div class="flex flex-col pl-12 pr-28 py-10 bg-gray-300 rounded-3xl">
+      <div class="flex flex-col bg-gray-300 rounded-3xl py-12 px-16 md:p-10 md:pl-12 md:pr-28">
         <div class="mb-6">
           <div class="flex items-center">
-            <h1 class="text-4xl font-semibold mb-4">{name}</h1>
+            <h1 class="text-2xl font-semibold mb-4 md:text-4xl">{name}</h1>
           </div>
-          <span class="text-lg font-semibold"
-            >Numero: <span class="rounded-xl bg-slate-100 p-1"
-              >#{Number(id) < 10 ? `00${id}` : Number(id) < 100 ? `0${id}` : id}</span
-            ></span
-          >
+          <span class="text-lg font-semibold">Numero: <span class="rounded-xl bg-slate-100 p-1">#{Number(id) < 10 ? `00${id}` : Number(id) < 100 ? `0${id}` : id}</span></span>
         </div>
         <div class="mb-6">
           <h2 class="text-xl font-semibold mb-2">Tipos:</h2>
           <div class="flex flex-wrap">
-            {
-              types.map((type) => (
-                <div
-                  class={`rounded-full py-1 px-2 mr-2 font-semibold ${typeColors[type.type.name]} ${typeTextColors[type.type.name]}`}
-                >
-                  {type.type.name.toUpperCase()}
-                </div>
-              ))
-            }
+            {types.map((type) => (
+              <div class={`rounded-full py-1 px-2 mr-2 font-semibold ${typeColors[type.type.name]} ${typeTextColors[type.type.name]}`}>
+                {type.type.name.toUpperCase()}
+              </div>
+            ))}
           </div>
         </div>
         <div class="mb-6">
           <h2 class="text-xl font-semibold">Habilidades:</h2>
           <ul class="list-disc list-inside">
-            {
-              abilities.map((ability, index) => (
-                <li :key={index} class="text-lg">
-                  {ability.ability.name}
-                </li>
-              ))
-            }
+            {abilities.map((ability, index) => (
+              <li :key={index} class="text-lg">
+                {ability.ability.name}
+              </li>
+            ))}
           </ul>
         </div>
-        <div class="flex mb-6">
-          <div class="mr-10">
+        <div class="flex flex-col md:flex-row mb-6">
+          <div class="mr-10 mb-4 md:mb-0">
             <h2 class="text-xl font-semibold">Height:</h2>
             <ul class="list-disc list-inside">
               <p class="text-lg font-semibold ml-3">{height} kg</p>
@@ -95,11 +81,11 @@ const defense: number = defenseStat ? defenseStat.base_stat : 0;
             </ul>
           </div>
         </div>
-        <div class="flex">
-          <p class="bg-red-400 rounded-full p-2 text-xl font-bold">
+        <div class="flex flex-col md:flex-row">
+          <p class="bg-red-400 rounded-full p-2 text-xl font-bold mb-4 md:mb-0 text-center">
             hp: {hp}
           </p>
-          <p class="ml-5 bg-slate-400 rounded-full p-2 text-xl font-bold">
+          <p class="ml-0 md:ml-5 bg-slate-400 rounded-full p-2 text-xl font-bold text-center">
             def: {defense}
           </p>
         </div>
